@@ -7,3 +7,7 @@ Functionalities included:
  - Loading text files from hard drive for editing
  - Finding occurences of a specific string using the search bar on the editor window
  - Saving file to hard drive
+
+How to run:
+ - Download the source code files from the 'src' folder.
+ - Run ApplicationRunner.java from console/IDE.
