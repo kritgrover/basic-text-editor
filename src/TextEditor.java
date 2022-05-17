@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
-/*
-* Class for building the Text Editor Window
-* Uses Swing framework for building the window and the buttons
-* Contains methods for functionality
-*/
+/* Editor Class
+ * Class for building the Text Editor Window
+ * Uses Swing framework for building the window and the buttons
+ * Contains methods for functionality
+ */
 public class TextEditor extends JFrame {
     private JTextArea textArea;
     private JTextField searchField;
@@ -41,12 +41,12 @@ public class TextEditor extends JFrame {
         buildMenuBar();
     }
     
-    //Method to build File Menu
+    //Method to build File Menu on Menu Bar
     private void buildMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("File");
         
-        //initializing operations
+        //adding operations
         JMenuItem loadMenuItem = new JMenuItem("Load");
         JMenuItem saveMenuItem = new JMenuItem("Save");
         JMenuItem exitMenuItem = new JMenuItem("Exit");
@@ -61,7 +61,7 @@ public class TextEditor extends JFrame {
         saveMenuItem.addActionListener(l -> saveFile(textArea.getText()));
         exitMenuItem.addActionListener(l -> System.exit(0));
         
-        //adding options
+        //displaying options
         menu.add(loadMenuItem);
         menu.add(saveMenuItem);
         menu.addSeparator();
@@ -72,12 +72,12 @@ public class TextEditor extends JFrame {
         setJMenuBar(menuBar);
     }
     
-    //Method to build Search menu from Menu Bar
+    //Method to build Search Menu for Menu Bar
     private JMenu createSearchMenu() {
         JMenu menu = new JMenu("Search");
         menu.setName("MenuSearch");
         
-        //initializing options
+        //adding options
         JMenuItem startMenuItem = new JMenuItem("Start search");
         JMenuItem prevMenuItem = new JMenuItem("Previous search");
         JMenuItem nextMenuItem = new JMenuItem("Next match");
@@ -94,7 +94,7 @@ public class TextEditor extends JFrame {
         startMenuItem.addActionListener(l -> onSearch());
         regExMenuItem.addActionListener(l -> toggleCheckBox());
         
-        //adding options
+        //displaying options
         menu.add(startMenuItem);
         menu.add(prevMenuItem);
         menu.add(nextMenuItem);
@@ -197,6 +197,7 @@ public class TextEditor extends JFrame {
         searchField.setName("SearchField");
         searchField.setPreferredSize(new Dimension(18, 35));
         
+        //Making Use Regex checkbox
         checkBox = new JCheckBox();
         checkBox.setName("UseRegExCheckbox");
         JLabel checkBoxLabel = new JLabel("Use regex");
@@ -250,6 +251,7 @@ public class TextEditor extends JFrame {
         }
     }
     
+    
     private void handleSearch(java.util.List<MatchedGroup> matchedGroupList) {
         if(!matchedGroupList.isEmpty()) {
             this.matchedGroups = matchedGroupList;
@@ -296,6 +298,7 @@ public class TextEditor extends JFrame {
         }
     }
     
+    //Method for highlighting String found using Search Bar
     private void setCaretPosition(MatchedGroup matchedGroup) {
         textArea.setCaretPosition(matchedGroup.getEndIndex());
         textArea.select(matchedGroup.getStartIndex(), matchedGroup.getEndIndex());
