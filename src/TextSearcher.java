@@ -5,6 +5,11 @@ import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/* Searcher class to find strings
+ * 
+ *
+ *
+*/
 public class TextSearcher extends SwingWorker<List<MatchedGroup>,Void> {
     private String textToSearch = "";
     private String content;
@@ -14,7 +19,8 @@ public class TextSearcher extends SwingWorker<List<MatchedGroup>,Void> {
         this.searchCompleteHandler = searchCompleteHandler;
     }
 
-
+    
+    //Method to return an ArrayList of 
     @Override
     protected List<MatchedGroup> doInBackground() {
         Pattern pattern = Pattern.compile(textToSearch);
@@ -25,7 +31,9 @@ public class TextSearcher extends SwingWorker<List<MatchedGroup>,Void> {
         }
         return positions;
     }
-
+    
+    //Method to confirm if String exists
+    //Does nothing when not found
     @Override
     protected void done() {
         try {
@@ -34,11 +42,13 @@ public class TextSearcher extends SwingWorker<List<MatchedGroup>,Void> {
             //do Nothing
         }
     }
-
+    
+    //Setter for input
     public void setTextToSearch(String textToSearch) {
         this.textToSearch = textToSearch;
     }
-
+    
+    //Setter for 
     public void setContent(String content) {
         this.content = content;
     }
