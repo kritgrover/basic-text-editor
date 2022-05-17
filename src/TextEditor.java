@@ -31,6 +31,7 @@ public class TextEditor extends JFrame {
         setVisible(true);
     }
     
+    
     //Adding components
     private void initComponent() {
         fileChooser = new JFileChooser();
@@ -40,6 +41,7 @@ public class TextEditor extends JFrame {
         buildTop();
         buildMenuBar();
     }
+    
     
     //Method to build File Menu on Menu Bar
     private void buildMenuBar() {
@@ -72,6 +74,7 @@ public class TextEditor extends JFrame {
         setJMenuBar(menuBar);
     }
     
+    
     //Method to build Search Menu for Menu Bar
     private JMenu createSearchMenu() {
         JMenu menu = new JMenu("Search");
@@ -103,26 +106,6 @@ public class TextEditor extends JFrame {
         return menu;
     }
     
-    private void toggleCheckBox() {
-        boolean currentChecked = !checkBox.isSelected();
-        checkBox.setSelected(currentChecked);
-    }
-    
-    //Method for building Text Area where the editing takes place
-    private void addTextArea() {
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setEnabled(true);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        addBorder(scrollPane, 0, 8, 8, 8);
-        scrollPane.setName("ScrollPane");
-        setLocationRelativeTo(null);
-        textArea = new JTextArea();
-        textArea.setName("TextArea");
-        textArea.setLineWrap(true);
-        scrollPane.setViewportView(textArea);
-        add(scrollPane, BorderLayout.CENTER);
-    }
     
     //Method for building buttons above text area
     private void buildTop() {
@@ -160,6 +143,23 @@ public class TextEditor extends JFrame {
         layout.setHgap(20);
         layout.setAlignment(FlowLayout.LEFT);
         add(container, BorderLayout.NORTH);
+    }
+    
+    
+    //Method for building Text Area where the editing takes place
+    private void addTextArea() {
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setEnabled(true);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        addBorder(scrollPane, 0, 8, 8, 8);
+        scrollPane.setName("ScrollPane");
+        setLocationRelativeTo(null);
+        textArea = new JTextArea();
+        textArea.setName("TextArea");
+        textArea.setLineWrap(true);
+        scrollPane.setViewportView(textArea);
+        add(scrollPane, BorderLayout.CENTER);
     }
     
     /*
@@ -216,14 +216,9 @@ public class TextEditor extends JFrame {
         return panel;
     }
     
-    //Functionality for Search Button
-    private void onSearch() {
-        currentIndex = 0;
-        matchedGroups = java.util.List.of();
-        TextSearcher textSearcher = new TextSearcher(this::handleSearch);
-        textSearcher.setTextToSearch(searchField.getText());                    //Specifying string to find
-        textSearcher.setContent(textArea.getText());                            //Specifying data to look through
-        textSearcher.execute();                                                 // Finding string
+    private void toggleCheckBox() {
+        boolean currentChecked = !checkBox.isSelected();
+        checkBox.setSelected(currentChecked);
     }
     
     //Adding borders for components
@@ -236,6 +231,18 @@ public class TextEditor extends JFrame {
         }
         component.setBorder(new CompoundBorder(empty, border));
     }
+    
+    
+    //Functionality for Search Button
+    private void onSearch() {
+        currentIndex = 0;
+        matchedGroups = java.util.List.of();
+        TextSearcher textSearcher = new TextSearcher(this::handleSearch);
+        textSearcher.setTextToSearch(searchField.getText());                    //Specifying string to find
+        textSearcher.setContent(textArea.getText());                            //Specifying data to look through
+        textSearcher.execute();                                                 //Runs doInBackground() and done()
+    }
+    
     
     //Functionality for Load button
     private void loadContent() {
@@ -252,16 +259,6 @@ public class TextEditor extends JFrame {
     }
     
     
-    private void handleSearch(java.util.List<MatchedGroup> matchedGroupList) {
-        if(!matchedGroupList.isEmpty()) {
-            this.matchedGroups = matchedGroupList;
-            MatchedGroup matchedGroup = matchedGroupList.get(currentIndex);
-            setCaretPosition(matchedGroup);
-        } else {
-            this.matchedGroups = java.util.List.of();
-        }
-    }
-    
     //Functionality for Next button
     private void onNext() {
         if(matchedGroups.isEmpty())
@@ -273,6 +270,7 @@ public class TextEditor extends JFrame {
         setCaretPosition(matchedGroups.get(currentIndex));
     }
     
+    
     //Functionality for Previous button
     private void onPrev() {
         if(matchedGroups.isEmpty())
@@ -283,6 +281,7 @@ public class TextEditor extends JFrame {
         }
         setCaretPosition(matchedGroups.get(currentIndex));
     }
+    
     
     //Functionality for Save button
     private void saveFile(String content) {
@@ -298,6 +297,22 @@ public class TextEditor extends JFrame {
             //do nothing
         }
     }
+    
+    
+    /* HandleSearch Method
+     * Stores given MatchedGroup List to instance variable
+     * Creates new MatchedCroup with current index
+    */
+    private void handleSearch(java.util.List<MatchedGroup> matchedGroupList) {
+        if(!matchedGroupList.isEmpty()) {
+            this.matchedGroups = matchedGroupList;
+            MatchedGroup matchedGroup = matchedGroupList.get(currentIndex);
+            setCaretPosition(matchedGroup);
+        } else {
+            this.matchedGroups = java.util.List.of();
+        }
+    }
+    
     
     //Method for highlighting String found using Search Bar
     private void setCaretPosition(MatchedGroup matchedGroup) {
