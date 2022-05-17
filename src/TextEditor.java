@@ -221,9 +221,9 @@ public class TextEditor extends JFrame {
         currentIndex = 0;
         matchedGroups = java.util.List.of();
         TextSearcher textSearcher = new TextSearcher(this::handleSearch);
-        textSearcher.setTextToSearch(searchField.getText());
-        textSearcher.setContent(textArea.getText());
-        textSearcher.execute();
+        textSearcher.setTextToSearch(searchField.getText());                    //Specifying string to find
+        textSearcher.setContent(textArea.getText());                            //Specifying data to look through
+        textSearcher.execute();                                                 // Finding string
     }
     
     //Adding borders for components
@@ -291,6 +291,7 @@ public class TextEditor extends JFrame {
         File file = fileChooser.getSelectedFile();
         if(file == null)
             return;
+        
         try(FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(content);
         } catch (IOException e) {
