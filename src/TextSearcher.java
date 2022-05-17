@@ -20,7 +20,7 @@ public class TextSearcher extends SwingWorker<List<MatchedGroup>,Void> {
     }
 
     
-    //Method to return an ArrayList of 
+    //Method to return an ArrayList of found occurences of String
     @Override
     protected List<MatchedGroup> doInBackground() {
         Pattern pattern = Pattern.compile(textToSearch);
@@ -33,7 +33,6 @@ public class TextSearcher extends SwingWorker<List<MatchedGroup>,Void> {
     }
     
     //Method to confirm if String exists
-    //Does nothing when not found
     @Override
     protected void done() {
         try {
@@ -43,12 +42,12 @@ public class TextSearcher extends SwingWorker<List<MatchedGroup>,Void> {
         }
     }
     
-    //Setter for input
+    //Setter for input to be searched for
     public void setTextToSearch(String textToSearch) {
         this.textToSearch = textToSearch;
     }
     
-    //Setter for 
+    //Setter for defining content to search from
     public void setContent(String content) {
         this.content = content;
     }
