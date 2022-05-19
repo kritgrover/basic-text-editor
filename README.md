@@ -8,6 +8,16 @@ A basic Text Editor created using Java and Swing.
  - Finding occurences of a specific string using the search bar on the editor window
  - Saving file to hard drive
 
+## Supported File Types
+ - .txt
+ - .rtf
+ - .csv
+ - .json
+ - .md
+ - other forms of text files...
+
+ Makes it a good tool for cleaning data and finding specific entries used in fields such as Data Science, dealing with these file formats with an easy to use GUI.
+
 ## How to Run:
  - Download TextEditor.exe
  - Run
