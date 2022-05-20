@@ -16,10 +16,10 @@ A basic Text Editor created using Java and Swing.
  - .md
  - other forms of text files...
 
- Makes it a good tool for cleaning data and finding specific entries used in fields such as Data Science, dealing with these file formats with an easy to use GUI.
+ Makes it a good tool for cleaning data and finding specific entries used in fields such as Data Science which deal with these file formats, with an easy to use GUI.
 
 ## How to Run:
- - Download TextEditor.exe
+ - Download here: [TextEditor.exe](https://github.com/kritgrover/basic-text-editor/releases)
  - Run
  
 All source files used to compile executable are in the 'src' folder.
