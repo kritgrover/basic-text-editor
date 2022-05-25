@@ -1,4 +1,4 @@
-/* MatchedGroup Class
+/** MatchedGroup Class
  * Methods to return Start and End Indexes for given String
 */
 public class MatchedGroup {

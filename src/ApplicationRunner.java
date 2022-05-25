@@ -1,4 +1,4 @@
-/* Runner Class
+/** Runner Class
  * Contains main method for the application to run
  * Use this to start the app
 */

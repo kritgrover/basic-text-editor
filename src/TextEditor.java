@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
-/* Editor Class
- * Class for building the Text Editor Window
+/** Editor Class
+ * Contains methods for building the Text Editor Window
  * Uses Swing framework for building the window and the buttons
  * Contains methods for functionality
  */
@@ -49,7 +49,7 @@ public class TextEditor extends JFrame {
         JMenu menu = new JMenu("File");
         
         //adding operations
-        JMenuItem loadMenuItem = new JMenuItem("Load");
+        JMenuItem loadMenuItem = new JMenuItem("Open");
         JMenuItem saveMenuItem = new JMenuItem("Save");
         JMenuItem exitMenuItem = new JMenuItem("Exit");
 
@@ -112,15 +112,19 @@ public class TextEditor extends JFrame {
         JPanel panel = new JPanel();
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         
-        //Images folder not added in this code but can be used if needed
-        ImageIcon saveButtonImage = new ImageIcon("images/diskette.png");
-        ImageIcon loadImageIcon = new ImageIcon("images/open.png");
+        /* Removed Load and Save buttons temporarily.
+         * Files can be loaded or saved from the File Menu on the Menu Bar
+        ImageIcon saveButtonImage = new ImageIcon("images/save.png");
+        ImageIcon loadImageIcon = new ImageIcon("images/load.png");
+
+        saveButtonImage = changeSize(saveButtonImage);
+        loadImageIcon = changeSize(loadImageIcon);
         
         //Initializing Load and Save Buttons
         JButton saveButton = new JButton(saveButtonImage);
         JLabel saveButtonLabel = new JLabel("Save");
         JButton loadButton = new JButton(loadImageIcon);
-        JLabel loadButtonLabel = new JLabel("Load");
+        JLabel loadButtonLabel = new JLabel("Open");
 
         loadButton.setName("OpenButton");
         saveButton.setName("SaveButton");
@@ -129,22 +133,24 @@ public class TextEditor extends JFrame {
         loadButton.addActionListener(l -> loadContent());
         saveButton.addActionListener(l -> saveFile(textArea.getText()));
 
-        //Displaying Buttons
+
+        Displaying Buttons
         panel.add(loadButton);
         panel.add(loadButtonLabel);
         panel.add(saveButton);
         panel.add(saveButtonLabel);
+        */
 
 
         JPanel container = new JPanel();
-        container.add(panel);
+        //container.add(panel);
         container.add(createSearchPanel());
         FlowLayout layout = (FlowLayout) container.getLayout();
         layout.setHgap(20);
         layout.setAlignment(FlowLayout.LEFT);
         add(container, BorderLayout.NORTH);
     }
-    
+
     
     //Method for building Text Area where the editing takes place
     private void addTextArea() {
@@ -152,7 +158,7 @@ public class TextEditor extends JFrame {
         scrollPane.setEnabled(true);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        addBorder(scrollPane, 0, 8, 8, 8);
+        addBorder(scrollPane);
         scrollPane.setName("ScrollPane");
         setLocationRelativeTo(null);
         textArea = new JTextArea();
@@ -162,18 +168,22 @@ public class TextEditor extends JFrame {
         add(scrollPane, BorderLayout.CENTER);
     }
     
-    /*
-    * Method for creating Search panel and regex options
+    /** Method for creating Search panel and regex options
     * - Creates a search bar for finding specific string in loaded file
-    * - Next and Previous Buttons are used to find corresponding occurences of the string
+    * - Next and Previous Buttons are used to find corresponding occurrences of the string
     */
     private JPanel createSearchPanel() {
         JPanel panel = new JPanel();
-        
-        //Images folder not included in this code but can be used if needed
-        ImageIcon nextIcon = new ImageIcon("images/next.jpg");
+
+        //Getting images as button icons
+        ImageIcon nextIcon = new ImageIcon("images/next.png");
         ImageIcon prevIcon = new ImageIcon("images/previous.png");
         ImageIcon searchIcon = new ImageIcon("images/search.png");
+
+        //Updating sizes
+        nextIcon = changeSize(nextIcon);
+        prevIcon = changeSize(prevIcon);
+        searchIcon = changeSize(searchIcon);
         
         //Initializing buttons
         JButton searchButton = new JButton(searchIcon);
@@ -222,14 +232,20 @@ public class TextEditor extends JFrame {
     }
     
     //Adding borders for components
-    private void addBorder(JComponent component, int top, int right, int bottom, int left) {
+    private void addBorder(JComponent component) {
         Border border = component.getBorder();
-        Border empty = new EmptyBorder(top, left, bottom, right);
-        if(border == null) {
+        Border empty = new EmptyBorder(0, 8, 8, 8);
+        if (border == null) {
             component.setBorder(empty);
             return;
         }
         component.setBorder(new CompoundBorder(empty, border));
+    }
+
+    private ImageIcon changeSize(ImageIcon icon) {
+        Image image = icon.getImage();
+        Image newImg = image.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+        return new ImageIcon(newImg);
     }
     
     
@@ -299,7 +315,7 @@ public class TextEditor extends JFrame {
     }
     
     
-    /* HandleSearch Method
+    /** HandleSearch Method
      * Stores given MatchedGroup List to instance variable
      * Creates new MatchedCroup with current index
     */
