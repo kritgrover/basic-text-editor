@@ -8,6 +8,17 @@ A basic Text Editor created using Java and Swing.
  - Finding occurrences of a specific string using the search bar on the editor window
  - Saving file to hard drive
 
+## Working Explained:
+ - Once the Text Editor is launched, the Menu Bar, Search Bar along with the search options and the Editor window will be displayed.
+
+ - One can just begin typing in to create a new file, just like in Notepad. Otherwise, choose the 'Open' option from the File Menu to load a file of supported format, for editing / searching.
+
+ - Once the file is loaded in, any and all changes can be made directly to the text. For searching, use the Search Bar above the editor window to search for a string in the file. Choose the Search, Prev and Next buttons to go through the file and search for occurrences of the given string.
+
+ - Save the file using the 'Save' option from the File Menu and navigate to the directory you want to save the file in, just like in other text editors.
+
+ - All the changes will be made in the local file. Close the Text Editor.
+
 ## Supported File Types
  - .txt
  - .rtf
